@@ -113,3 +113,44 @@ walk(document, function(node) {
     firstPar ? (firstPar = !firstPar) : node.classList.add('stanza');
   }
 });
+
+//
+
+// For the remaining practice problems, please use this Wikipedia page:
+// https://en.wikipedia.org/wiki/Polar_bear
+//
+// To test your code, download the page using "Save Page As" or "Save Page" in your browser, then edit the HTML file to insert your JavaScript. Note that some text editors may take a long time to load the HTML.
+
+
+// 5. Count the images on the page, then count the PNG images. Log both results.
+
+var imgCount = 0;
+var pngCount = 0;
+
+walk(document, function(node) {
+  if (node.nodeName === "IMG") {
+    imgCount += 1;
+    if (/png$/.test(node.getAttribute('src'))) pngCount += 1;
+  }
+});
+
+console.log(imgCount, pngCount); // 49 24
+
+
+// 6. Change the link color to red for every link on the page.
+
+walk(document, function (node) {
+  if (node.nodeName === 'A') node.style.color = 'red';
+});
+
+
+
+
+
+
+
+
+
+
+
+//
