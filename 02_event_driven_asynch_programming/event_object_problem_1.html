@@ -1,0 +1,49 @@
+<!-- 1. Starting with the template below, write some JavaScript code to move the red X to the last position in the document that the user clicked. Click the "EDIT ON CODEPEN" button on the upper-right to edit the template. -->
+
+<!doctype html>
+<html>
+  <head>
+    <title>Event Context</title>
+    <script>
+        document.addEventListener('click', function (event) {
+          var elm = document.getElementsByClassName('x')[0];
+          elm.style.left = String(event.clientX + 'px');
+          elm.style.top = String(event.clientY + 'px');
+          // var par = document.getElementById('message');
+          // par.textContent = String(event.clientX) + ' ' + String(event.clientY) + ' ' + elm.className;
+        });
+    </script>
+    <style>
+      .x {
+      position: absolute;
+      transform: rotate(45deg);
+      top: 20px;
+      left: 20px;
+      }
+
+      .x .horizontal {
+      width: 45px;
+      height: 5px;
+      position: absolute;
+      left: -20px;
+      background: red;
+      }
+
+      .x .vertical {
+      height: 45px;
+      width: 5px;
+      background: red;
+      position: absolute;
+      left: 0px;
+      top: -20px;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="message"></p>
+    <div class="x">
+      <div class="horizontal"></div>
+      <div class="vertical"></div>
+    </div>
+  </body>
+</html>
