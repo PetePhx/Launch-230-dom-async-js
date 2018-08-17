@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head>
+    <title>bubbling example</title>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var divs = document.querySelectorAll('.pick');
+        var i;
+        for (i = 0; i < divs.length; i++) {
+          divs[i].addEventListener('click', highlightThis, true);
+        }
+
+        function highlightThis(e) {
+          alert(this.className + ' ' + e.currentTarget.tagName);
+        }
+
+        document.querySelector('.d3').addEventListener('click', highlightThis, false);
+      });
+    </script>
+    <style>
+    .d1 {
+      background-color: green;
+      position: relative;
+      width: 200px;
+      height: 200px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .d2 {
+      background-color: blue;
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      width: 150px;
+      height: 150px;
+    }
+
+    .d3 {
+      background-color: red;
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      width: 100px;
+      height: 100px;
+      line-height: 25px;
+    }
+
+    .d4 {
+      background-color: yellow;
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+    }
+    </style>
+  </head>
+  <body>
+    <p>
+      Study the example below.
+      <br/>
+      * Can you predict what happens when you click on "4"?
+      <br/>
+      * If we add the following line of code, what will happen?
+      <br/>
+      `document.querySelector('.d3').addEventListener('click', highlightThis, false);`
+    </p>
+    <p><em>Solution: (1) As it is written, the javascript code in lines 9-11 assigns event handlers to all elements of class `pick` where during the capturing phase (outer to inner element) an alert is displayed for each element of the pick class (d1, d2, d4) showing the element class as well as the  tag name for the element with the added handler. (2) adding the code in line 17 adds an event listener to d3, which executes the callback function `highlightThis` in the bubbling phase when clicked (after all other event handlers are executed).</em></p>
+    <div class="d1 pick">1
+      <section class="d2 pick">2
+        <div class="d3">3
+          <main class="d4 pick">4
+          </main>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

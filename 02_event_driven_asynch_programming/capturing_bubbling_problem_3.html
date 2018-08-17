@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <head>
+    <title>bubbling example</title>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var elem0 = document.querySelector('#elem0');
+        var elem1 = document.querySelector('#elem1');
+        var elem4 = document.querySelector('#elem4');
+
+        elem0.addEventListener('click', function(event) {
+          alert(event.currentTarget.tagName);
+        });
+
+        elem1.addEventListener('click', function(event) {
+          alert(event.currentTarget.tagName);
+        }, true);
+
+        elem4.addEventListener('click', function(event) {
+          alert(event.currentTarget.tagName);
+        });
+      });
+    </script>
+    <style>
+      #elem0 {
+        width: 250px;
+        height: 250px;
+        position: absolute;
+        background-color: orange;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      #elem1 {
+        background-color: green;
+        position: relative;
+        top: 25px;
+        left: 25px;
+        width: 200px;
+        height: 200px;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      #elem2 {
+        background-color: blue;
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        width: 150px;
+        height: 150px;
+      }
+
+      #elem3 {
+        background-color: red;
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        width: 100px;
+        height: 100px;
+        line-height: 25px;
+      }
+
+      #elem4 {
+        background-color: yellow;
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <p>Check out the HTML structure and the JavaScript code. How many alert boxes do you think will fire when the yellow box is clicked? Why?</p>
+    <p><em>Solution: 2 alert boxes are shown. The event handler for elem0 is not triggered, since elements 1 to 4 are NOT nested within elem0, hence it is excluded in the capturing and bubbling phases.</em></p>
+    <div id="elem0">0</div>
+    <div id="elem1">1
+      <section id="elem2">2
+        <article id="elem3">3
+          <main id="elem4">4
+          </main>
+        </article>
+      </section>
+    </div>
+  </body>
+</html>
