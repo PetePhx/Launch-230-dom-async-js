@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+  <head>
+    <title>bubbling example</title>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () { // <==== this is needed
+        var elem2 = document.querySelector('#elem2');
+        var elem4 = document.querySelector('#elem4');
+        var counter = 0;
+        var parag = document.querySelector('p');
+        elem2.addEventListener('click', function (event) {
+          counter += 1;
+          parag.textContent = String(counter);
+          alert(event.currentTarget.tagName);
+          // alert(event.currentTarget.tagName);
+        });
+        elem4.addEventListener('click', function (event) {
+          alert(event.currentTarget.tagName);
+        });
+      });
+    </script>
+    <style>
+      #elem1 {
+      background-color: green;
+      position: relative;
+      width: 200px;
+      height: 200px;
+      text-align: center;
+      cursor: pointer;
+      }
+
+      #elem2 {
+      background-color: blue;
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      width: 150px;
+      height: 150px;
+      }
+
+      #elem3 {
+      background-color: red;
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      width: 100px;
+      height: 100px;
+      line-height: 25px;
+      }
+
+      #elem4 {
+      background-color: yellow;
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="elem1">div
+      <section id="elem2">section
+        <article id="elem3">article
+          <main id="elem4">main
+          </main>
+        </article>
+      </section>
+    </div>
+    <p>0</p>
+  </body>
+</html>
