@@ -4,26 +4,32 @@
 <html>
   <head>
     <title>Event Context</title>
+
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         var textarea = document.querySelector('.composer textarea');
         var parag = document.querySelector('.composer .counter');
+        var button = document.querySelector('.composer button');
         parag.textContent = '140 characters remaining';
         var updateRemaining = function () {
           var len = textarea.value.length;
           var remaining = 140 - len;
-          (remaining < 0) ? (textarea.classList.add('invalid')) : (textarea.classList.remove('invalid'));
-
+          if (remaining < 0) {
+            textarea.classList.add('invalid');
+            button.disabled = true;
+          } else {
+            textarea.classList.remove('invalid');
+            button.disabled = false;
+          }
           parag.textContent = String(remaining) + ' ' + 'characters remaining';
         };
 
         ['keyup', 'keydown', 'keypress'].forEach(function (ev) {
           textarea.addEventListener(ev, updateRemaining);
         });
-
       });
-
     </script>
+
     <style>
       .composer {
         background: #f5f5f5;
