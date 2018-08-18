@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+  <head>
+    <title>bubbling example</title>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelector('button').addEventListener('click', function(event) {
+        event.preventDefault(); //                                     <========
+        alert('Following the link was prevented.');
+      });
+
+      document.querySelector('a').addEventListener('click', function(event) {
+        event.stopPropagation(); //                                    <========
+        alert('Click event on the anchor tag');
+      }, true);
+    });
+    </script>
+    <style>
+    button {
+    width: 100px;
+    height: 100px;
+    background: blue;
+    color: white;
+    position: relative;
+    top: 25px;
+    left: 25px;
+    }
+
+    a {
+    display: block;
+    width: 150px;
+    height: 150px;
+    background: red;
+    }
+    </style>
+  </head>
+  <body>
+    <a href="/">
+      <button>View Page</button>
+    </a>
+  </body>
+</html>
