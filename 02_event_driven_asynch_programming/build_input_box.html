@@ -5,13 +5,33 @@
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         var textField = document.querySelector('.text-field');
+        var content = document.querySelector('.content');
+        var cursorId;
         textField.addEventListener('click', function (event) {
           event.stopPropagation();
           textField.classList.add('focused');
+          if (cursorId) clearInterval(cursorId);
+          cursorId = setInterval(function () {
+            textField.classList.toggle('cursor');
+          }, 500);
         });
 
         document.addEventListener('click', function (event) {
+          clearInterval(cursorId);
           textField.classList.remove('focused');
+          textField.classList.remove('cursor');
+        });
+
+        document.addEventListener('keypress', function (event) {
+          if (textField.classList.contains('focused')) {
+            content.textContent += event.key;
+          }
+        });
+
+        document.addEventListener('keydown', function (event) {
+          if (event.key === 'Backspace' && textField.classList.contains('focused')) {
+            content.textContent = content.textContent.slice(0, -1);
+          }
         });
       });
     </script>
