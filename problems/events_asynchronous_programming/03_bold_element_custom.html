@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>03 Make Bold + Custom</title>
+    <script>
+    // Implement a function that makes an element bold and allows the user of the function to optionally do something else with it.
+      function makeBold(elm, func) {
+        elm.style.fontWeight = 'bold';
+        if (func && typeof(func) === 'function') func(elm);
+      }
+
+      function addHighlight(elm) {
+        if (elm.tagName === 'SECTION') {
+          elm.classList.add('highlight');
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        parag = document.querySelector('p');
+        section = document.querySelector('section');
+
+        parag.addEventListener('click', function (event) {
+           makeBold(parag, function () {});
+        });
+
+        section.addEventListener('click', function (event) {
+          makeBold(section, addHighlight);
+        });
+      });
+    </script>
+    <style>
+      .highlight {
+        background-color: orange;
+      }
+    </style>
+  </head>
+  <body>
+    <section>Hello World</section>
+    <p>Greetings!</p>
+  </body>
+</html>
