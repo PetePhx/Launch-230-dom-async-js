@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <title>02 reverse enginnering</title>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // document.querySelector('html').addEventListener('click', function() {
+        //   document.querySelector('#container').style = 'display: none';
+        // });
+        //
+        // document.querySelector('#container').addEventListener('click', function(event) {
+        //   event.stopPropagation();
+        // });
+
+        var container = document.querySelector('#container');
+
+        document.querySelector('html').addEventListener('click', function() {
+          if (!container.contains(event.target)) {
+          container.style = 'display: none';
+          }
+        });
+      });
+    </script>
+    <style>
+      #container {
+        width: 50%;
+        border: solid black 1px;
+        background-color: grey;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <p>This is the container.</p>
+      <p>click inside</p>
+      <p>click outside</p>
+    </div>
+  </body>
+</html>
