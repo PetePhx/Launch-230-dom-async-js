@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+  <head>
+    <title>05 context menus</title>
+    <script>
+      function keyName(str) { return str.toLowerCase().replace('-', ''); }
+
+      var animals = {
+        bear: ['vertebrate', 'warmblooded', 'mammal'],
+        turtle: ['vertebrate', 'coldblooded'],
+        whale: ['vertebrate', 'warmblooded', 'mammal'],
+        salmon: ['vertebrate', 'coldblooded'],
+        ostrich: ['vertebrate', 'warmblooded', 'bird'],
+      };
+
+      var classifications = {
+        vertebrate: ['bear', 'turtle', 'whale', 'salmon', 'ostrich'],
+        warmblooded: ['bear', 'whale', 'ostrich'],
+        coldblooded: ['salmon', 'turtle'],
+        mammal: ['bear', 'whale'],
+        bird: ['ostrich'],
+      };
+
+      document.addEventListener('DOMContentLoaded', function () {
+        var classificationsMenu = document.getElementById('animal-classifications');
+        var animalsMenu = document.getElementById('animals');
+        var clearButton = document.getElementById('clear');
+
+        classificationsMenu.addEventListener('change', function (event) {
+          animalsMenu.options.length = 0;
+          classifications[keyName(event.target.value)].forEach(function (elm, idx) {
+            animalsMenu.options[idx] = new Option(elm);
+          });
+        });
+
+        animalsMenu.addEventListener('change', function (event) {
+          classificationsMenu.options.length = 0;
+          animals[keyName(event.target.value)].forEach(function (elm, idx) {
+            classificationsMenu.options[idx] = new Option(elm);
+          });
+        });
+
+        clearBtn.addEventListener('click', function (event) {
+          event.preventDefault();
+          Object.keys(animals).forEach(function (key, idx) {
+            animalsMenu.options[idx] = key;
+          });
+          Object.keys(classifications).forEach(function (key, idx) {
+            classificationsMenu.options[idx] = key;
+          });
+        });
+      });
+    </script>
+    <style>
+      table {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Given the HTML below, write JS code that updates the options on one dropdown every time the selection in the other dropdown changes. For instance, when the user chooses an option other than the one currently displayed in the left dropdown (i.e., "Classifications"), then the options on the dropdown to the right of it should change accordingly. Use the lookup table that follows for what the available options should be given a selection change in one of the dropdowns.
+    </p>
+
+    <p><strong>Selection Change with Filter1: Animal Classifications</strong></p>
+
+    <table>
+    <thead>
+    <tr>
+    <th>Selection</th>
+    <th>Animals Options</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Vertebrate</td>
+    <td>Bear, Turtle , Whale, Salmon, Ostrich</td>
+    </tr>
+    <tr>
+    <td>Warm-blooded</td>
+    <td>Bear, Whale, Ostrich</td>
+    </tr>
+    <tr>
+    <td>Cold-blooded</td>
+    <td>Salmon, Turtle</td>
+    </tr>
+    <tr>
+    <td>Mammal</td>
+    <td>Bear, Whale</td>
+    </tr>
+    <tr>
+    <td>Bird</td>
+    <td>Ostrich</td>
+    </tr>
+    </tbody>
+    </table>
+
+    <p><strong>Selection Change with Filter2: Animals</strong></p>
+
+    <table>
+    <thead>
+    <tr>
+    <th>Selection</th>
+    <th>Animal Classifications Options</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Bear</td>
+    <td>Vertebrate, Warm-blooded, Mammal</td>
+    </tr>
+    <tr>
+    <td>Turtle</td>
+    <td>Vertebrate, Cold-blooded</td>
+    </tr>
+    <tr>
+    <td>Whale</td>
+    <td>Vertebrate, Warm-blooded, Mammal</td>
+    </tr>
+    <tr>
+    <td>Salmon</td>
+    <td>Vertebrate, Cold-blooded</td>
+    </tr>
+    <tr>
+    <td>Ostrich</td>
+    <td>Vertebrate, Warm-blooded, Bird</td>
+    </tr>
+    </tbody>
+    </table>
+
+    <p>Correspondingly, clicking on the "clear" button resets to the default values in the provided HTML.</p>
+
+    <form id="selection-filters" method="post" action="#">
+      <select id="animal-classifications">
+        <option value="Classifications" selected>Classifications</option>
+        <option value="Vertebrate">Vertebrate</option>
+        <option value="Warm-blooded">Warm-blooded</option>
+        <option value="Cold-blooded">Cold-blooded</option>
+        <option value="Mammal">Mammal</option>
+        <option value="Bird">Bird</option>
+      </select>
+      <select id="animals">
+        <option value="Animals" selected>Animals</option>
+        <option value="Bear">Bear</option>
+        <option value="Turtle">Turtle</option>
+        <option value="Whale">Whale</option>
+        <option value="Salmon">Salmon</option>
+        <option value="Ostrich">Ostrich</option>
+      </select>
+      <button id="clear">Clear</button>
+    </form>
+  </body>
+</html>
+
+<!--
+  inputs given: a set of animals and classifications
+  output: dynamically updated menues for animals and classifications options based on the other choice
+
+  rules: Each animal belongs to one or more classifications, based on the given table
+
+  algorithm:
+  - set up event listeners on the three menus for classifications, animals, and the clear button
+
+  - Every time a classification is chosen, only the animals in the class are visible. The first one would be the default.
+
+  - vice versa for the animal menu.
+
+  - pressing clear would set everything back to the defaul.
+
+
+-->
