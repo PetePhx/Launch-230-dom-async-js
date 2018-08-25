@@ -1,0 +1,112 @@
+<html>
+  <head>
+    <title>09 Events Tracker</title>
+    <meta charset="utf-8">
+    <script>
+      var tracker = (function () {
+        var list = [];
+        var elements = [];
+        return {
+          list: function () { return list.slice(); },
+          elements: function () { return elements.slice(); },
+          clear: function () {
+            list = [];
+            elements = [];
+          },
+          add: function (e) {
+            if (!elements.includes(e.target)) elements.push(e.target);
+            list.push(e.target.tagName + '#' + e.target.id);
+          },
+        };
+      })();
+
+      function track(event, cb) {
+        return (function (event) {
+          if (!event.added) {
+            tracker.add(event);
+            event.added = true;
+          }
+          cb(event);
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', function (e) {
+        var divRed = document.querySelector('div#red');
+        var divBlue = document.querySelector('div#blue');
+        var divGreen = document.querySelector('div#green');
+        var divOrange = document.querySelector('div#orange');
+
+        divRed.addEventListener('click', track(event, function() {
+          document.body.style.background = 'red';
+        }));
+
+        divBlue.addEventListener('click', track(event, function() {
+          event.stopPropagation();
+          document.body.style.background = 'blue';
+        }));
+
+        divOrange.addEventListener('click', track(event, function() {
+          document.body.style.background = 'orange';
+        }));
+
+        divGreen.addEventListener('click', track(event, function() {
+          document.body.style.background = 'green';
+        }));
+      });
+    </script>
+    <style>
+     #red, #blue, #green, #orange {
+         cursor: pointer;
+         color: white;
+         padding: 10px;
+         margin: 10px;
+     }
+     #red {
+         width: 400px;
+         height: 400px;
+         background: red;
+     }
+
+     #blue {
+         width: 200px;
+         height: 200px;
+         background: blue;
+     }
+
+     #orange {
+         width: 100px;
+         height: 100px;
+         background: orange;
+     }
+
+     #green {
+         width: 50px;
+         height: 50px;
+         background: green;
+     }
+    </style>
+  </head>
+  <body>
+    <div id="red">Red
+      <div id="blue">Blue</div>
+      <div id="orange">Yellow
+        <div id="green">Green</div>
+      </div>
+    </div>
+    <!-- <script src="test.js"></script> -->
+  </body>
+</html>
+<!--
+  tracker.elements()
+      (4) [div#blue, div#red, div#orange, div#green]
+  tracker.list()
+      (4) ["DIV#blue", "DIV#red", "DIV#orange", "DIV#green"]
+  tracker.clear();
+      undefined
+  tracker.list()
+      []
+  tracker.list()[0] = 'abc'
+      "abc"
+  tracker.list()
+      []
+-->
