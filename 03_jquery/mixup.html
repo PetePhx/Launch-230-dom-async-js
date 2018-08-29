@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="site.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+      $(function () {
+        $('main').before($('body > header'));
+        $('nav').before($('main > h1'));
+        $('figcaption').first().before($('img').last()); // swap img 1
+        $('figcaption').last().before($('img').first()); // with img 2
+        $('article > p').after($('figure')); // move inside article
+      });
+    </script>
+    <style>
+      body {
+        font: normal 16px Georgia, serif;
+        background: #666666;
+      }
+
+      header, h1, section, article, footer, nav, figure, img, main, body > main + header, main h1 + section {
+        background: #f0c0c0;
+      }
+
+      body > header,
+      body > header > h1,
+      body > header > h1 + nav,
+      body > header + main,
+      main > section,
+      header + main > section > article,
+      header + main > section > article > header,
+      header + main > section > article > header > h1,
+      main > section > article > figure,
+      main + footer,
+      main > section > article > figure:first-of-type img[src$="stick.jpg"],
+      main > section > article > figure + figure img[src$="mop.jpg"] {
+        background: #c0f0c0;
+      }
+
+      body > header {
+        width: 800px;
+        padding: 20px;
+        margin: 0 auto;
+        box-sizing: border-box;
+      }
+
+      body > header h1 {
+        font: bold 2em Helvetica, Arial, sans-serif;
+      }
+
+      footer {
+        width: 800px;
+        padding: 15px;
+        margin: 0 auto;
+        font-size: .75em;
+        box-sizing: border-box;
+      }
+
+      a {
+        text-decoration: none;
+        color: #183f9c;
+      }
+
+      nav {
+        padding: 10px 0 0 0;
+        font: normal 1.3em Helvetica, Arial, sans-serif;
+      }
+
+      nav ul {
+        margin: 0;
+        list-style: none;
+      }
+
+      nav li {
+        display: inline-block;
+        width: 11em;
+        text-align: center;
+      }
+
+      main {
+        width: 800px;
+        margin: 0 auto;
+      }
+
+      section {
+        padding: 20px;
+      }
+
+      section header h1 {
+        font-size: 1.8em;
+      }
+
+      section header h2 {
+        font-size: 1.3em;
+      }
+
+      figure {
+        text-align: center;
+      }
+
+      img {
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1><a href="#">My Site!</a></h1>
+      <section id="content">
+        <article>
+          <header>
+            <h1>Welcome to my site!</h1>
+            <h2>I hope you stay a while.</h2>
+          </header>
+          <p>This is my personal slice of the Internet, where I post my ideas and projects that I've completed or am currently working on. All are patent pending.</p>
+        </article>
+        <figure>
+          <img src="images/baby_mop.jpg" alt="The baby mop" />
+          <figcaption>The chin stick &ndash; stay upright while sleeping!</figcaption>
+        </figure>
+        <figure>
+          <img src="images/chin_stick.jpg" alt="The chin stick" />
+          <figcaption>The baby mop &ndash; great for wet and dry mopping!</figcaption>
+        </figure>
+      </section>
+    </main>
+
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <footer>
+      <p>&copy; 2014 me. All projects are patent pending</p>
+    </footer>
+  </body>
+</html>
