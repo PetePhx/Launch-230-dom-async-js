@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Grocery List</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="stylesheets/groceries.css" />
+    <link rel="stylesheet" href="stylesheets/print.css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+      $(function () {
+        $ul = $('ul');
+        $('form').on('submit', function (event) {
+          event.preventDefault();
+          var quant = $('#quantity').val() || '1';
+          var name = $('#name').val();
+          if (!name) return alert('Item Name Can\'t Be Empty');
+          // var li = document.createElement('li');
+          // li.textContent = quant + ' ' + name;
+          // $ul.get(0).appendChild(li);
+          $ul.append('<li>' + quant + ' ' + name + '</li>');
+
+          this.reset();
+        });
+      });
+    </script>
+    <style>
+      html, body {
+        padding: 25px 0;
+        margin: 0;
+        font: normal 16px Helvetica, Arial, sans-serif;
+        color: #16997c;
+        background: #5bccb3;
+      }
+
+      main {
+        display: block;
+        max-width: 450px;
+        padding: 20px;
+        margin: 0 auto;
+        background: #ffffff;
+        box-sizing: border-box;
+      }
+
+      h1 {
+        text-align: center;
+        color: #CC183E;
+      }
+
+      fieldset {
+        padding: 0 0 25px 0;
+        margin: 0;
+        border: none;
+      }
+
+      label {
+        display: block;
+        padding: 0 0 5px 0;
+        font-weight: bold;
+      }
+
+      input[type="text"] {
+        width: 80px;
+        height: 50px;
+        padding: 5px;
+        margin: 0 0 20px 0;
+        font: normal 24px Georgia, Palatino, serif;
+        border: 1px solid #cecece;
+        box-sizing: border-box;
+      }
+
+      input#name { width: 100%; }
+
+      input[type="submit"] {
+        display: block;
+        width: 100%;
+        padding: 15px 0;
+        font: normal 20px Helvetica, Arial, sans-serif;
+        color: #ffffff;
+        text-shadow: 1px 1px 5px rgba(80, 80, 80, .8);
+        border: 1px solid #91112C;
+        box-shadow: 0 0 1px 1px #780e24;
+        border-radius: 11px;
+        background: linear-gradient(to bottom, #CC183E 0%, #780E24 100%);
+      }
+
+      li {
+        padding: 10px;
+      }
+
+      li + li {
+        border-top: 1px solid #ececec;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <form action="" method="post">
+        <h2>Add an item</h2>
+        <fieldset>
+          <label for="name">Item name</label>
+          <input type="text" name="name" id="name" />
+          <label for="quantity">Quantity</label>
+          <input type="text" name="quantity" id="quantity" value="1"/>
+          <input type="submit" value="Add" />
+        </fieldset>
+      </form>
+      <h1>Groceries</h1>
+      <ul></ul>
+    </main>
+  </body>
+</html>
