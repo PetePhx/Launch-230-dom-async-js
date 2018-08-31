@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <title>Plain JavaScript Animation</title>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var frameLength = 13;     // delay between each frame in milliseconds
+      var speed = 400;           // duration of animation in milliseconds
+      var steps = Math.round(speed / frameLength);
+      var endTop = 250;
+      var endLeft = 500;
+      var paragraph = document.querySelector('p'); // p has "position: absolute" for this snippet
+      var i = 0;
+
+      var update = function() {
+        paragraph.style.top = endTop * (i / steps) + 'px';
+        paragraph.style.left = endLeft * (i / steps) + 'px';
+        i += 1;
+        i < steps && setTimeout(update, frameLength);
+      };
+
+      update();  // kick off the animation loop
+      
+      // Alternatively:
+      //
+      // var update = function () { // iife
+      //   for (let j = 0; j <= steps; j += 1) {
+      //     let frac = j / steps;
+      //     setTimeout(function () {
+      //       paragraph.style.top = endTop * frac + 'px';
+      //       paragraph.style.left = endLeft * frac + 'px';
+      //     }, speed * frac);
+      //   }
+      // }();
+    });
+  </script>
+  <style>
+    p {
+      position: absolute;
+      /* top: 100px;
+      left: 100px; */
+    }
+  </style>
+</head>
+<body>
+  <p>
+    JavaScript Animation
+  </p>
+</body>
+</html>
