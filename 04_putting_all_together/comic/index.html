@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="comic.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+      $(function () {
+        var $blinds = $('div[id^=blind]');
+        var delay = 500;
+        var speed = 250;
+        var delayedConvo = function () {
+          $blinds.each(function (idx) {
+            // alternatively, instead of calculating finTop, we could use:
+            // top: "+=" + $(this).height()
+          let finTop = Number($(this).css('top').slice(0, -2)) +
+          Number($(this).css('height').slice(0, -2));
+          $(this).delay(delay * idx + speed).animate({
+              top: finTop,
+              height: 0,
+            }, speed);
+          });
+        };
+
+        $('#startover').click(function (e) {
+          e.preventDefault();
+          $blinds.finish(); // to end the previous animation
+          $blinds.removeAttr("style");
+          delayedConvo();
+        });
+
+        delayedConvo();
+      });
+
+    </script>
+  </head>
+  <body>
+    <div id="comic">
+      <div id="panel_1">
+        <div id="blind_1"></div>
+        <div id="blind_2"></div>
+      </div>
+
+      <div id="panel_2">
+        <div id="blind_3"></div>
+        <div id="blind_4"></div>
+      </div>
+
+      <div id="panel_3">
+        <div id="blind_5"></div>
+        <div id="blind_6"></div>
+      </div>
+
+      <div id="panel_4">
+        <div id="blind_7"></div>
+        <div id="blind_8"></div>
+        <div id="blind_9"></div>
+      </div>
+    </div>
+    <button id="startover">start over</button>
+  </body>
+</html>
