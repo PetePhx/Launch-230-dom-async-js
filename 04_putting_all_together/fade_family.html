@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <title>the fade family</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script>
+    $(function () {
+      var $p = $('p');
+      var $div = $('div');
+      // $p.fadeOut(1000);
+      // setTimeout(function () { $p.fadeIn(1000); }, 1000);
+
+      $p.fadeToggle(1000).fadeToggle(1000);
+        // .fadeToggle(1000).fadeToggle(1000)
+        // .fadeToggle(1000).fadeToggle(1000);
+
+      $div.fadeIn(2500, function () {
+        $(this).addClass("visible");
+      });
+    });
+  </script>
+  <style>
+    p {
+      position: absolute;
+    }
+
+    div {
+      display: none;
+    }
+
+    .visible {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <p>
+    JavaScript Animation
+  </p>
+  <div>
+    Another Animation (DIV)
+  </div>
+</body>
+</html>
