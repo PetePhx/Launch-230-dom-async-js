@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Search Filtering</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="stylesheets/catalog.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+      var catalog = [{
+        "title": "The Legend of Zelda: Majora's Mask 3D",
+        "id": 1,
+        "category": "Nintendo 3DS"
+      }, {
+        "title": "Super Smash Bros.",
+        "id": 2,
+        "category": "Nintendo 3DS"
+      }, {
+        "title": "Super Smash Bros.",
+        "id": 3,
+        "category": "Nintendo WiiU"
+      }, {
+        "title": "LEGO Batman 3: Beyond Gotham",
+        "id": 4,
+        "category": "Nintendo WiiU"
+      }, {
+        "title": "LEGO Batman 3: Beyond Gotham",
+        "id": 5,
+        "category": "Xbox One"
+      }, {
+        "title": "LEGO Batman 3: Beyond Gotham",
+        "id": 6,
+        "category": "PlayStation 4"
+      }, {
+        "title": "Far Cry 4",
+        "id": 7,
+        "category": "PlayStation 4"
+      }, {
+        "title": "Far Cry 4",
+        "id": 8,
+        "category": "Xbox One"
+      }, {
+        "title": "Call of Duty: Advanced Warfare",
+        "id": 9,
+        "category": "PlayStation 4"
+      }, {
+        "title": "Call of Duty: Advanced Warfare",
+        "id": 10,
+        "category": "Xbox One"
+      }];
+
+      $(function () {
+        var $items = $('main li');
+        var $categories = $(":checkbox");
+
+        $categories.on("change", function () {
+          var checked = $(this).is(":checked");
+          var category = $(this).val();
+          var category_items = catalog.filter(function (elm) {
+            return elm.category === category;
+          });
+          category_items.forEach(function (elm) {
+            $items.filter('[data-id=' + elm.id + ']').toggle(checked);
+          });
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="page">
+      <form id="search" action="" method="get">
+        <fieldset>
+          <input type="search" placeholder="Enter a game name" />
+          <input type="submit" value="Search" />
+        </fieldset>
+      </form>
+
+      <main>
+        <h1>Games</h1>
+        <ul>
+          <li data-id="1">The Legend of Zelda: Majora's Mask 3D for Nintendo 3DS</li>
+          <li data-id="2">Super Smash Bros. for Nintendo 3DS</li>
+          <li data-id="3">Super Smash Bros. for Nintendo WiiU</li>
+          <li data-id="4">LEGO Batman 3: Beyond Gotham for Nintendo WiiU</li>
+          <li data-id="5">LEGO Batman 3: Beyond Gotham for Xbox One</li>
+          <li data-id="6">LEGO Batman 3: Beyond Gotham for PlayStation 4</li>
+          <li data-id="7">Far Cry 4 for PlayStation 4</li>
+          <li data-id="8">Far Cry 4 for Xbox One</li>
+          <li data-id="9">Call of Duty: Advanced Warfare for PlayStation 4</li>
+          <li data-id="10">Call of Duty: Advanced Warfare for Xbox One</li>
+        </ul>
+      </main>
+
+      <aside>
+        <form action="" method="get">
+          <fieldset>
+            <ul>
+              <li>
+                <label>
+                  <input type="checkbox" value="Nintendo 3DS" checked />
+                  Nintendo 3DS
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" value="Nintendo WiiU" checked />
+                  Nintendo WiiU
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" value="PlayStation 4" checked />
+                  PlayStation 4
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" value="Xbox One" checked />
+                  Xbox One
+                </label>
+              </li>
+            </ul>
+          </fieldset>
+        </form>
+      </aside>
+    </div>
+  </body>
+</html>
