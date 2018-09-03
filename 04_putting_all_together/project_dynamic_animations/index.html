@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <title></title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="canvas.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script>
+  </script>
+</head>
+<body>
+  <main>
+    <div id="canvas">
+    </div>
+    <p>
+      <a href="#">Start</a>
+      |
+      <a href="#">Stop</a>
+    </p>
+    <form action="" method="post">
+      <fieldset>
+        <h1>Add A Shape</h1>
+        <h2>Type</h2>
+        <ul>
+          <li><label><input type="radio" name="shape_type" val="square"/>Square</label></li>
+          <li><label><input type="radio" name="shape_type" val="circle"/>Circle</label></li>
+          <li><label><input type="radio" name="shape_type" val="star"/>Star</label></li>
+        </ul>
+        <dl>
+          <dt>
+            <label for="start_x">Starting Point</label>
+          </dt>
+          <dd>
+            <input type="number" name="start_x" placeholder="x:"/>
+            <input type="number" name="start_y" placeholder="y:"/>
+          </dd>
+          <dt>
+            <label for="end_x">Ending Point</label>
+          </dt>
+          <dd>
+            <input type="number" name="end_x" placeholder="x:"/>
+            <input type="number" name="end_y" placeholder="y:"/>
+          </dd>
+        </dl>
+        <button type="submit">Add</button>
+      </fieldset>
+    </form>
+  </main>
+</body>
+</html>
