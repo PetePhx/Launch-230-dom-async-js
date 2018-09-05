@@ -1,5 +1,12 @@
 (function () {
   var _ = function (arr) {
+    var propsMatch = function (obj, elm) {
+      for (var prop in obj) {
+        if (!elm.hasOwnProperty(prop) || obj[prop] !== elm[prop]) return false;
+      }
+      return true;
+    };
+
     var u = {
       first: function () { return arr[0]; },
       last: function () { return arr[arr.length - 1]; },
@@ -23,7 +30,24 @@
         if (!num) return get();
         for (var i = 0; i < num && copyArr.length > 0; i += 1) { sampleArr.push(get()); }
         return sampleArr;
-      }
+      },
+      findWhere: function (props) {
+        for (var i = 0; i < arr.length; i += 1) {
+          if (propsMatch(props, arr[i])) return arr[i];
+        }
+        return undefined;
+      },
+      where: function (props) {
+        return arr.filter(function (elm) {
+          return propsMatch(props, elm);
+        });
+      },
+      pluck: function (prop) {
+        return arr.filter(function (elm) { return elm.hasOwnProperty(prop); })
+                  .map(function (elm) { return elm[prop]; });
+      },
+      keys: function () { return Object.keys(arr); },
+      values: function () { return Object.values(arr); },
     };
     return u;
   };
