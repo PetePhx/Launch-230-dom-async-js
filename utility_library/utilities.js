@@ -62,6 +62,14 @@
       },
       has: function (prop) { return (prop in aggr); },
     };
+
+    [
+      'isElement', 'isArray', 'isObject', 'isFunction',
+      'isBoolean', 'isString', 'isNumber'
+    ].forEach(function (method) {
+      u[method] = function () { _[method].call(u, aggr); };
+    });
+
     return u;
   };
 
@@ -75,6 +83,29 @@
       for (var prop in tempObj) { obj1[prop] = tempObj[prop]; }
       return obj1;
   };
+
+  _.isElement = function (obj) {
+    return obj && ('nodeType' in obj) && (obj.nodeType === 1);
+  };
+
+  _.isArray = Array.isArray || function (obj) {
+    // return obj && (typeof(obj) === 'object') && (obj.constructor === Array);
+    return obj && toString.call(obj) === "[object Array]";
+  };
+
+  _.isObject = function (obj) {
+    return obj && (typeof(obj) === 'object' || typeof(obj) === 'function');
+  };
+
+  _.isFunction = function (obj) {
+    return obj && typeof(obj) === 'function';
+  };
+
+  ['Boolean', 'String', 'Number'].forEach(function (method) {
+    _['is' + method] = function (obj) {
+      return toString.call(obj) === '[object ' + method + ']';
+    };
+  });
 
   window._ = _;
 })();
