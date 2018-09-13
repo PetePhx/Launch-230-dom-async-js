@@ -2,8 +2,8 @@ var inventory;
 
 (function () {
   inventory = {
+    lastId: 0,
     collection: [],
-    // ...
     setDate: function () {
       var date = (new Date()).toString();
       $('#order_date').text(date.match(/^\w\w\w \w\w\w \d\d \d\d\d\d/)[0]); // mmm dd yyyy
@@ -14,20 +14,18 @@ var inventory;
     },
     addItem: function (e) {
       e.preventDefault();
-      inventory.lastId += 1;
-      $('#inventory').append(inventory.template
-                             .replace(/ID/g, inventory.lastId));
-      inventory.collection.push({
-        id: inventory.lastId,
+      this.lastId += 1;
+      $('#inventory').append(this.template.replace(/ID/g, this.lastId));
+      this.collection.push({
+        id: this.lastId,
         name: '',
         stockNumber: '',
         quantity: 1,
       });
     },
-    lastId: 0,
     updateItem: function (e) {
       var id = Number($(e.target).attr('name').slice(-1));
-      var item = inventory.collection.find(function (elm) {
+      var item = this.collection.find(function (elm) {
         return elm.id === id;
       });
       item.name = $('input[name="item_name_' + id + '"]').val();
@@ -37,22 +35,23 @@ var inventory;
     deleteItem: function (e) {
       e.preventDefault();
       var id = Number($(e.target).closest('tr')
-                                  .find('td input')
-                                  .eq(0)
-                                  .attr('name')
-                                  .slice(-1));
-      var idx = inventory.collection.findIndex(function (elm) {
+                                 .find('td input[type=hidden]')
+                                 .val());
+      var idx = this.collection.findIndex(function (elm) {
         return elm.id === id;
       });
-      inventory.collection.splice(idx, 1);
+      this.collection.splice(idx, 1);
       $('input[name="item_name_' + id + '"]').closest('tr').remove();
+    },
+    bindEvents: function () {
+      $('#add_item').on('click', this.addItem.bind(this));
+      $('#inventory').on('blur', ':input', this.updateItem.bind(this));
+      $('#inventory').on('click', 'a.delete', this.deleteItem.bind(this));
     },
     init: function () {
       this.setDate();
       this.cacheTemplate();
-      $('#add_item').on('click', this.addItem);
-      $('#inventory').on('blur', 'input', this.updateItem);
-      $('#inventory').on('click', 'a', this.deleteItem);
+      this.bindEvents();
     }
   };
 
