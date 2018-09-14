@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Handlebars Assignment</title>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
+    <script src="./assignment.js"></script>
+  </head>
+  <body>
+    <script id="tag" type="text/x-handlebars">
+      <strong>{{this}}</strong>
+    </script>
+
+    <script id="posts" type="text/x-handlebars">
+      {{#each posts}}
+      <article>
+        <h1>{{title}}</h1>
+        <p><time>Posted on {{published}}</time></p>
+        {{{body}}}
+      </article>
+      <footer>
+        <p>
+          {{#if tags}}
+          Tags:
+          {{#each tags}}
+          {{>tag}}
+          {{/each}}
+          {{else}}
+          Not Tagged
+          {{/if}}
+        </p>
+      </footer>
+      {{/each}}
+    </script>
+  </body>
+</html>
