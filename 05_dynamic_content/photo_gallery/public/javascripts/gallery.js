@@ -42,6 +42,7 @@ $(function () {
     },
     fadeDur: 500, //miliseconds
     renderPhotoContent: function (idx) {
+      $('[name=photo_id]').val(idx);
       renderPhotoInformation(idx);
       getCommentsFor(idx);
     },
@@ -76,4 +77,32 @@ $(function () {
       },
     });
   }
+
+  $('section > header').on('click', ".actions a", function (e) {
+    e.preventDefault();
+    var $e = $(e.target);
+    $.ajax({
+      url: $e.attr('href'),
+      method: "POST",
+      data: "photo_id=" + $e.attr("data-id"),
+      success: function (json) {
+        $e.text(function (i, txt) {
+          return txt.replace(/\d+/, json.total);
+        });
+      },
+    });
+  });
+
+  $('form').on('submit', function (e) {
+    e.preventDefault();
+    var $f = $(this);
+    $.ajax({
+      url: $f.attr('action'),
+      method: $f.attr('method'),
+      data: $f.serialize(),
+      success: function (json) {
+        $('#comments ul').append(templates.comment(json));
+      },
+    });
+  });
 });
