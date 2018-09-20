@@ -1,0 +1,37 @@
+body {
+  background: teal;
+  height: 100%;
+}
+
+h1 {
+  color: white;
+  font: 24px normal sans-serif;
+}
+
+ul.listing {
+  list-style: none;
+  border-width: 1px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+ul.listing li {
+  /* outline: 1px solid red; */
+}
+
+u.listing figure {
+  /* position */
+  outline: 1px solid red;
+}
+
+ul.listing figcaption {
+  position: absolute;
+  padding: 5px;
+  width: 25%;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+ul.listing img {
+  border: 10px solid white;
+}
