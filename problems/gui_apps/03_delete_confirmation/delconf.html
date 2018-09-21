@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Custom Todo with Delete Confirmation</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="delconf.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="handlebars-v4.0.12.js"></script>
+    <script src="delconf.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Todos</h1>
+    </main>
+  </body>
+
+  <script type="text/x-handlebars" id="todo_item">
+    <li id="{{id}}">{{title}} <a href="#" class="delete_button">del</a></li>
+  </script>
+
+  <script type="text/x-handlebars" id="todo_list">
+    <ul class="todos">
+      {{#each items}}
+      {{> todo_item}}
+      {{/each}}
+    </ul>
+  </script>
+
+</html>
