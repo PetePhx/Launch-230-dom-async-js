@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="carshop.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../handlebars-v4.0.12.js"></script>
+    <script src="carshop.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Buy Used Cars</h1>
+      <form class="specs-form" action="#" method="post">
+        <label for="make">Make</label>
+        <select name="make">
+          <option value="all" selected>All</option>
+          <option value="Honda">Honda</option>
+          <option value="Toyota">Toyota</option>
+          <option value="Suzuki">Suzuki</option>
+          <option value="Audi">Audi</option>
+        </select>
+        <label for="model">Model</label>
+        <select name="model">
+          <option value="all" selected>All</option>
+          <option value="Accord">Accord</option>
+          <option value="Camry">Camry</option>
+          <option value="Corolla">Corolla</option>
+          <option value="Swift">Swift</option>
+          <option value="A4">A4</option>
+        </select>
+        <button type="submit">Filter</button>
+        <button type="reset">Reset</button>
+      </form>
+    </header>
+    <main>
+      </ul>
+    </main>
+  </body>
+  <script type="text/x-handlebars" id="list-template">
+    <ul class="list-ul">
+      {{#each cars}}
+      {{> car_li}}
+      {{/each}}
+    </ul>
+  </script>
+  <script type="text/x-handlebars" id="car-template">
+    <li class="car-li">
+      <figure>
+        <img src="https://picsum.photos/200/150" title="{{make}} {{model}}"/>
+        <figcaption>{{make}} {{model}}</figcaption>
+        <p>Year: {{year}}</p>
+        <p>Price: ${{price}}</p>
+      </figure>
+    </li>
+  </script>
+</html>
