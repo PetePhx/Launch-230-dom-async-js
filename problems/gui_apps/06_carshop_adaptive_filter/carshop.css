@@ -1,0 +1,30 @@
+body {
+  max-width: 1000px;
+  margin: 10px auto;
+  font-family: sans-serif;
+}
+
+header {
+  background-color: sienna;
+  color: white;
+  padding: 10px;
+}
+
+ul.list-ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin: 0;
+  padding: 0;
+}
+
+figure {
+  margin: 10px;
+  padding: 10px;
+}
