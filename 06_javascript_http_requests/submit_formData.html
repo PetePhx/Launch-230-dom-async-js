@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Submitting Forms using formData</title>
+    <meta charset="utf-8" />
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var form = document.getElementById('form');
+
+        form.addEventListener('submit', function(event) {
+          // prevent the browser from submitting the form
+          event.preventDefault();
+
+          var data = new FormData(form);
+
+          var request = new XMLHttpRequest();
+          request.open('POST', 'http://ls-230-book-catalog.herokuapp.com/books');
+
+          request.addEventListener('load', function() {
+            if (request.status === 201) {
+              console.log('This book was added to the catalog: ' + request.responseText);
+            }
+          });
+
+          request.send(data);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <form id="form">
+      <p><label>Title: <input type="text" name="title"></label></p>
+      <p><label>Author: <input type="text" name="author"></label></p>
+      <p><button type="submit">Submit</button></p>
+    </form>
+  </body>
+</html>
