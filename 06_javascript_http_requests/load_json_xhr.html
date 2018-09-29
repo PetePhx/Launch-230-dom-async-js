@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Loading JSON data Using XHR</title>
+    <meta charset="utf-8" />
+    <!-- <link rel="stylesheet" href="_.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="javascripts/handlebars-v4.0.12.js"></script>
+    <script src="_.js"></script> -->
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      section {
+        margin-left: 50px;
+        font-weight: bold;
+      }
+    </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var p1 = document.getElementById('httpstatus');
+        var p2 = document.getElementById('openissues');
+        var request = new XMLHttpRequest();
+        var data;
+        request.open('GET', 'https://api.github.com/repos/rails/rails');
+        request.responseType = 'json';
+
+        request.addEventListener('load', function () {
+          data = request.response;
+          p1.innerHTML = 'HTTP Status: ' + request.status;
+          p2.innerHTML = 'Open Issues: ' + data.open_issues;
+        });
+
+        request.addEventListener('error', function() {
+          var errorMsg = 'The request could not be completed!';
+          console.log(errorMsg);
+          p1.innerHTML = 'Error: ' + errorMsg;
+        });
+
+        request.send();
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Problems</h1>
+    <ol>
+      <li>
+        Write some JavaScript code that loads JSON data from <b>https://api.github.com/repos/rails/rails</b>, parses the JSON into a JavaScript object, and then logs the HTTP status code and the number of open issues to the console.
+      </li>
+      <section>
+        <p id="httpstatus"></p>
+        <p id="openissues"></p>
+      </section>
+
+      <li>
+        Extend the code from the previous exercise to log the message 'The request could not be completed!' to the console when the request produces an error.
+      </li>
+    </ol>
+
+  </body>
+</html>
