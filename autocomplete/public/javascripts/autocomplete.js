@@ -156,6 +156,10 @@ var Autocomplete = {
 
     this.wrapInput();
     this.createUI();
+
+
+    this.valueChanged = debounce(this.valueChanged.bind(this), 300);
+
     this.bindEvents();
 
     this.reset();
