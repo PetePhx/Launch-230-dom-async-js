@@ -22,21 +22,72 @@ var Autocomplete = {
 
   bindEvents: function () {
     this.input.addEventListener('input', this.valueChanged.bind(this));
+    this.input.addEventListener('keydown', this.handleKeydown.bind(this));
+    this.listUI.addEventListener('mousedown', this.handleMousedown.bind(this));
   },
 
   valueChanged: function () {
     var value = this.input.value;
+    this.previousValue = value;
 
     if (value.length > 0) {
       this.fetchMatches(value, function(matches) {
         this.visible = true;
         this.matches = matches;
         this.bestMatchIndex = 0;
+        this.selectedIndex = null;
         this.draw();
       }.bind(this));
     } else {
       this.reset();
     }
+  },
+
+  handleKeydown: function (event) {
+    switch(event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        if (this.selectedIndex === null || this.selectedIndex === this.matches.length - 1) {
+          this.selectedIndex = 0;
+        } else {
+          this.selectedIndex += 1;
+        }
+        this.bestMatchIndex = null;
+        this.draw();
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        if (this.selectedIndex === null || this.selectedIndex === 0) {
+          this.selectedIndex = this.matches.length - 1;
+        } else {
+          this.selectedIndex -= 1;
+        }
+        this.bestMatchIndex = null;
+        this.draw();
+        break;
+      case 'Tab':
+        if (this.bestMatchIndex !== null) {
+          this.input.value = this.matches[this.bestMatchIndex].name;
+          event.preventDefault();
+        }
+        this.reset();
+        break;
+      case 'Enter':
+        this.reset();
+        break;
+      case 'Escape': // escape
+        this.input.value = this.previousValue;
+        this.reset();
+        break;
+    }
+  },
+
+  handleMousedown: function (e) {
+    e.preventDefault();
+    var elm = e.target;
+    if (!elm.classList.contains('autocomplete-ui-choice')) return;
+    this.input.value = elm.textContent;
+    this.reset();
   },
 
   fetchMatches: function (query, callback) {
@@ -69,9 +120,14 @@ var Autocomplete = {
       this.overlay.textContent = '';
     }
 
-    this.matches.forEach(function(match) {
+    this.matches.forEach(function (match, index) {
       var li = document.createElement('li');
       li.classList.add('autocomplete-ui-choice');
+
+      if (index === this.selectedIndex) {
+        li.classList.add('selected');
+        this.input.value = match.name;
+      }
 
       li.textContent = match.name;
       this.listUI.appendChild(li);
@@ -82,6 +138,8 @@ var Autocomplete = {
     this.visible = false;
     this.matches = [];
     this.bestMatchIndex = null;
+    this.selectedIndex = null;
+    this.previousValue = null;
 
     this.draw();
   },
