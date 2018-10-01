@@ -115,7 +115,7 @@ var Autocomplete = {
 
     if (this.bestMatchIndex !== null) {
       var selected = this.matches[this.bestMatchIndex];
-      this.overlay.textContent = selected.name;
+      this.overlay.textContent = this.generateOverlayContent(this.input.value, selected);
     } else {
       this.overlay.textContent = '';
     }
@@ -132,6 +132,15 @@ var Autocomplete = {
       li.textContent = match.name;
       this.listUI.appendChild(li);
     }.bind(this));
+  },
+
+  generateOverlayContent: function (value, match) {
+    if (!match) {
+      return '';
+    }
+
+    var end = match.name.substr(value.length);
+    return value + end;
   },
 
   reset: function(query, callback) {
