@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Adding Schedules</title>
+    <meta charset="utf-8" />
+    <!-- <link rel="stylesheet" href="_.css" /> -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="javascripts/handlebars-v4.0.12.js"></script>
+    <script src="javascripts/adding_schedules.js"></script>
+  </head>
+  <body>
+    <button id="add-sched-btn">Add More Schedules</button>
+    <form id="schedules-frm" action="/api/schedules" method="post">
+
+      <button id="submit-btn" type="submit">Submit</button>
+    </form>
+  </body>
+  <script type="text/x-handlebars" id="form-template">
+    <fieldset id="fset-{{num}}">
+      <label for="staff-selc-{{num}}">Staff Name:</label>
+      <select id="staff-selc-{{num}}" name="staff" required>
+        <option value="" disabled selected>Choose Staff:</option>
+        {{#each staff}}
+          <option value="{{id}}">{{name}}</option>
+        {{/each}}
+      </select>
+      <label for="date-inp-{{num}}">Date:</label>
+      <input id="date-inp-{{num}}" name="date" placeholder="mm-dd-yy" required />
+      <label for="time-inp-{{num}}">Time:</label>
+      <input id="time-inp-{{num}}" name="time" placeholder="hh:mm" required />
+    </fieldset>
+  </script>
+</html>
