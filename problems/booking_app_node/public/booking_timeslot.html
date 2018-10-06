@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Booking Time Slots</title>
+    <meta charset="utf-8" />
+    <!-- <link rel="stylesheet" href="_.css" /> -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="javascripts/handlebars-v4.0.12.js"></script>
+    <script src="javascripts/booking_timeslot.js"></script>
+  </head>
+  <body>
+    <h1>Book a Schedule</h1>
+    <form id="book-schedule-frm" action="/api/bookings" method="post">
+      <label for="sched-selc">Please Select a Schedule Time-Slot:</label>
+      <select id="sched-selc" name="schedule" required>
+        <option value="" disabled selected>Choose:</option>
+        <option value="" disabled>Loading Data... Please Wait!</option>
+      </select>
+      <label for="email-inp">Email:</label>
+      <input id="email-inp" type="email" placeholder="you@example.com" required />
+      <button type="submit">Submit</button>
+    </form>
+
+  </body>
+  <script type="text/x-handlebars" id="options-template">
+    {{#each timeslots}}
+      <option value="{{id}}">{{staff_name}} | {{date}} | {{time}}</option>
+    {{/each}}
+  </script>
+
+  <script type="text/x-handlebars" id="new-student-template">
+    <h2>Registering a New Student</h2>
+    <form id="register-student-frm" action="/api/students", method="post">
+      <label for="register-email-inp">Email:</label>
+      <input id="register-email-inp" type="email" value="{{student_email}}" required />
+      <label for="register-name-inp">Name:</label>
+      <input id="register-name-inp" type="text" placeholder="your name" required />
+      <label for="booking-seq-inp">Booking Sequence:</label>
+      <input id="booking-seq-inp" value="{{booking_sequence}}" required disabled/>
+
+      <button type="submit">Submit</button>
+    </form>
+
+  </script>
+</html>
